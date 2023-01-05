@@ -10,4 +10,3 @@ RUN cd /tmp && \
     mv v2ray* /usr/bin/v2ray-plugin_linux_amd64 && \
     chmod +x /usr/bin/v2ray-plugin_linux_amd64
 
-USER nobody
