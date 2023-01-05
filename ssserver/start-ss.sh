@@ -31,6 +31,15 @@ exec ssserver \
     -m $METHOD \
     --timeout $TIMEOUT \
     --dns $DNS_ADDRS \
-    # --tcp-fast-open \
-    # --tcp-no-delay \
     $ARGS
+
+
+# exec ssserver \
+#     -s "0.0.0.0:8443" \
+#     -k $PASSWORD \
+#     -m $METHOD \
+#     --timeout $TIMEOUT \
+#     --dns $DNS_ADDRS \
+#     --tcp-fast-open \
+#     --tcp-no-delay \
+#     $ARGS
