@@ -25,21 +25,14 @@ echo "IOS_URL: $IOS_URL"
 echo
 
 
-exec ssserver \
-    -s "0.0.0.0:8443" \
+exec ss-server \
+    -s 0.0.0.0 \
+    -p 8443 \
     -k $PASSWORD \
     -m $METHOD \
-    --timeout $TIMEOUT \
-    --dns $DNS_ADDRS \
+    -t $TIMEOUT \
+    -d $DNS_ADDRS \
+    --reuse-port \
+    --no-delay \
+    --fast-open \
     $ARGS
-
-
-# exec ssserver \
-#     -s "0.0.0.0:8443" \
-#     -k $PASSWORD \
-#     -m $METHOD \
-#     --timeout $TIMEOUT \
-#     --dns $DNS_ADDRS \
-#     --tcp-fast-open \
-#     --tcp-no-delay \
-#     $ARGS

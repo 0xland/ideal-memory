@@ -1,4 +1,4 @@
-FROM ghcr.io/shadowsocks/ssserver-rust:latest
+FROM shadowsocks/shadowsocks-libev
 
 USER root
 
