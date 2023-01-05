@@ -29,6 +29,7 @@ services:
             - ./cert:/cert:ro
         restart: on-failure
         env_file: .env
+        user: root
         ulimits:
             nofile:
                 soft: 65536
