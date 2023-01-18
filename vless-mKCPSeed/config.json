@@ -1,0 +1,29 @@
+{
+    "log": {
+        "loglevel": "warning"
+    },
+    "inbounds": [
+        {
+            "protocol": "vless",
+            "port": 16834,
+            "settings": {
+                "decryption": "none",
+                "clients": [{ "id": "65081a6d-28c7-43d0-b943-dd72c1e23607" }]
+            },
+            "streamSettings": {
+                "network": "kcp",
+                "mtu": 1360,
+                "uplinkCapacity": 5,
+                "downlinkCapacity": 12,
+                "congestion": false,
+                "header": {
+                    "type": "dtls"
+                },
+                "kcpSettings": {
+                    "seed": ""
+                }
+            }
+        }
+    ],
+    "outbounds": [{ "protocol": "freedom" }]
+}

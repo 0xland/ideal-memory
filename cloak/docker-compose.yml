@@ -1,0 +1,37 @@
+version: "3.7"
+
+services:
+    nginx:
+        container_name: ss-nginx
+        image: nginx
+        volumes:
+            - ./nginx/templates:/etc/nginx/templates:ro
+            - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+            - ./nginx/wait-for-cert.sh:/wait-for-cert.sh
+            - ./../cert:/etc/nginx/cert:ro
+        restart: on-failure
+        ports:
+            - "443:443/tcp"
+        env_file: .env
+        ulimits:
+            nofile:
+                soft: 65535
+                hard: 65535
+        entrypoint: ["/wait-for-cert.sh", "/docker-entrypoint.sh", "nginx"]
+
+    ss-server:
+        build:
+            context: ./../ssserver
+            dockerfile: Dockerfile
+        command:
+            - "/start-cloak.sh"
+        volumes:
+            - ./../ssserver/start-cloak.sh:/start-cloak.sh:ro
+            - ./ckserver.json:/ckserver.json:ro
+        restart: on-failure
+        env_file: .env
+        user: root
+        ulimits:
+            nofile:
+                soft: 65536
+                hard: 65536

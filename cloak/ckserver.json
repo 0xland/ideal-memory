@@ -1,0 +1,11 @@
+{
+    "ProxyBook": {
+        "shadowsocks": ["tcp", "127.0.0.1:8443"]
+    },
+    "BindAddr": [":8338", ":8080"],
+    "BypassUID": [""],
+    "RedirAddr": "google.com",
+    "PrivateKey": "",
+    "AdminUID": "",
+    "DatabasePath": "userinfo.db"
+}

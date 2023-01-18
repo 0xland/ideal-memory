@@ -1,0 +1,36 @@
+version: "3.7"
+
+services:
+    acme.sh:
+        build:
+            context: ./../acmesh
+            dockerfile: Dockerfile
+        ports:
+            - "80:80/tcp"
+        volumes:
+            - ./../cert:/cert
+            - /var/run/docker.sock:/var/run/docker.sock
+        restart: always
+        env_file: .env
+        environment:
+            - "RELOADCMD=docker restart ss-server"
+
+    ss-server:
+        container_name: ss-server
+        build:
+            context: ./ssserver
+            dockerfile: Dockerfile
+        ports:
+            - "443:8443/tcp"
+        command:
+            - "/start-ss.sh"
+        volumes:
+            - ./ssserver/start-ss.sh:/start-ss.sh:ro
+            - ./../cert:/cert:ro
+        restart: on-failure
+        env_file: .env
+        user: root
+        ulimits:
+            nofile:
+                soft: 65536
+                hard: 65536
