@@ -16,18 +16,17 @@ services:
             - "RELOADCMD=docker restart ss-server"
 
     ss-server:
-        container_name: ss-server
         build:
-            context: ./ssserver
+            context: ./../ssserver
             dockerfile: Dockerfile
-        ports:
-            - "443:8443/tcp"
         command:
             - "/start-ss.sh"
         volumes:
-            - ./ssserver/start-ss.sh:/start-ss.sh:ro
-            - ./../cert:/cert:ro
+            - ./../cert:/cert
+            - ./../ssserver/start-ss.sh:/start-ss.sh:ro
         restart: on-failure
+        ports:
+            - "${PORT}:8443/tcp"
         env_file: .env
         user: root
         ulimits:
