@@ -20,7 +20,7 @@ services:
             context: ./../ssserver
             dockerfile: Dockerfile
         ports:
-            - "${KCP_PORT}:${KCP_PORT}/udp"
+            - "${PORT}:16384/udp"
         command:
             - "/start-kcp.sh"
         volumes:

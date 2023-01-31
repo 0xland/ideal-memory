@@ -11,7 +11,7 @@ exec ssserver \
 
 exec kcptun_linux_amd64 \
     -t 127.0.0.1:8443 \
-    -l 0.0.0.0:$KCP_PORT \
+    -l 0.0.0.0:16384 \
     --key $PASSWORD \
     --crypt aes-128 \
     --mode $KCP_MODE \
