@@ -15,12 +15,19 @@ if [ "$1" == "daemon" ]; then
   touch $KEY_PATH; chmod 644 $KEY_PATH
 
   RENEW_SKIP=2
+  
   if $LETSENCRYPT; then
     acme.sh --set-default-ca --server letsencrypt
   fi
+
   acme.sh --register-account -m mahsa@"${DOMAIN}"
-  acme.sh --issue -d "$DOMAIN" --standalone --keylength ec-256 --reloadcmd "$RELOADCMD" \
-      --key-file "$KEY_PATH" --fullchain-file "$CERT_PATH"
+  
+  if $USE_DNS; then
+    acme.sh --issue --dns dns_cf -d "$DOMAIN" --standalone --keylength ec-256 --reloadcmd "$RELOADCMD" --key-file "$KEY_PATH" --fullchain-file "$CERT_PATH"
+  
+  else 
+    acme.sh --issue -d "$DOMAIN" --standalone --keylength ec-256 --reloadcmd "$RELOADCMD" --key-file "$KEY_PATH" --fullchain-file "$CERT_PATH"
+  
   ret=$?
 
   [ "$ret" != "$RENEW_SKIP" ] && [ "$ret" != "0" ] && exit 1;

@@ -2,6 +2,15 @@
     "log": {
         "loglevel": "warning"
     },
+    "routing": {
+        "rules": [
+            {
+                "type": "field",
+                "ip": ["geoip:ir"],
+                "outboundTag": "block"
+            }
+        ]
+    },
     "inbounds": [
         {
             "listen": "127.0.0.1",
@@ -11,7 +20,7 @@
                 "clients": [
                     {
                         "id": "<UUID>",
-                        "flow": "xtls-rprx-vision,none"
+                        "flow": "xtls-rprx-vision"
                     }
                 ],
                 "decryption": "none"
@@ -36,7 +45,12 @@
     ],
     "outbounds": [
         {
-            "protocol": "freedom"
+            "protocol": "freedom",
+            "tag": "direct"
+        },
+        {
+            "protocol": "blackhole",
+            "tag": "block"
         }
     ],
     "policy": {
