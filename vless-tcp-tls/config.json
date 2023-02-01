@@ -4,40 +4,8 @@
     },
     "inbounds": [
         {
-            "port": 443,
-            "protocol": "vless",
-            "settings": {
-                "clients": [
-                    {
-                        "id": "<UUID>",
-                        "flow": "xtls-rprx-vision,none"
-                    }
-                ],
-                "decryption": "none",
-                "fallbacks": [
-                    {
-                        "path": "/<PATH>",
-                        "dest": 443
-                    }
-                ]
-            },
-            "streamSettings": {
-                "network": "tcp",
-                "security": "tls",
-                "tlsSettings": {
-                    "alpn": ["http/1.1", "h2"],
-                    "certificates": [
-                        {
-                            "certificateFile": "/cert/<DOMAIN>.cer",
-                            "keyFile": "/cert/<DOMAIN>.key"
-                        }
-                    ]
-                }
-            }
-        },
-        {
-            "port": 443,
             "listen": "127.0.0.1",
+            "port": 443,
             "protocol": "vless",
             "settings": {
                 "clients": [
@@ -49,12 +17,20 @@
                 "decryption": "none"
             },
             "streamSettings": {
-                "network": "ws",
-                "security": "none",
-                "wsSettings": {
-                    "acceptProxyProtocol": false,
-                    "path": "/<PATH>"
+                "network": "tcp",
+                "security": "tls",
+                "tlsSettings": {
+                    "certificates": [
+                        {
+                            "certificateFile": "/cert/<DOMAIN>.cer",
+                            "keyFile": "/cert/<DOMAIN>.key"
+                        }
+                    ]
                 }
+            },
+            "sniffing": {
+                "enabled": true,
+                "destOverride": ["http", "tls"]
             }
         }
     ],
