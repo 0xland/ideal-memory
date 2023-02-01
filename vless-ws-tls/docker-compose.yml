@@ -13,9 +13,9 @@ services:
         restart: always
         env_file: .env
         environment:
-            - "RELOADCMD=docker restart vless"
+            - "RELOADCMD=docker restart ss-server"
 
-    vless:
+    ss-server:
         build:
             context: ./../xray
             dockerfile: Dockerfile
