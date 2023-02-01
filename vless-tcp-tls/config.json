@@ -10,8 +10,8 @@
             "settings": {
                 "clients": [
                     {
-                        "id": "chika",
-                        "flow": "xtls-rprx-vision"
+                        "id": "<UUID>",
+                        "flow": "xtls-rprx-vision,none"
                     }
                 ],
                 "decryption": "none"
