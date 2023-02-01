@@ -4,34 +4,22 @@
     },
     "inbounds": [
         {
+            "listen": "127.0.0.1",
             "port": 443,
             "protocol": "vless",
             "settings": {
                 "clients": [
                     {
-                        "id": "<UUID>",
+                        "id": "chika",
                         "flow": "xtls-rprx-vision"
                     }
                 ],
-                "decryption": "none",
-                "fallbacks": [
-                    {
-                        "alpn": "h2",
-                        "dest": 443,
-                        "xver": 1
-                    },
-                    {
-                        "path": "/<PATH>",
-                        "dest": 443,
-                        "xver": 1
-                    }
-                ]
+                "decryption": "none"
             },
             "streamSettings": {
                 "network": "tcp",
                 "security": "tls",
                 "tlsSettings": {
-                    "alpn": ["http/1.1", "h2"],
                     "certificates": [
                         {
                             "certificateFile": "/cert/<DOMAIN>.cer",
@@ -39,47 +27,10 @@
                         }
                     ]
                 }
-            }
-        },
-        {
-            "port": 443,
-            "listen": "127.0.0.1",
-            "settings": {
-                "clients": [
-                    {
-                        "id": "<UUID>",
-                        "flow": "xtls-rprx-vision"
-                    }
-                ],
-                "decryption": "none"
             },
-            "streamSettings": {
-                "network": "grpc",
-                "grpcSettings": {
-                    "serviceName": "<ServiceName>"
-                }
-            }
-        },
-        {
-            "port": 443,
-            "listen": "127.0.0.1",
-            "protocol": "vless",
-            "settings": {
-                "clients": [
-                    {
-                        "id": "<UUID>",
-                        "flow": "xtls-rprx-vision"
-                    }
-                ],
-                "decryption": "none"
-            },
-            "streamSettings": {
-                "network": "ws",
-                "security": "none",
-                "wsSettings": {
-                    "acceptProxyProtocol": false,
-                    "path": "/<PATH>"
-                }
+            "sniffing": {
+                "enabled": true,
+                "destOverride": ["http", "tls"]
             }
         }
     ],
