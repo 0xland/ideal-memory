@@ -9,11 +9,17 @@
             "settings": {
                 "clients": [
                     {
-                        "id": "<UUID>"
+                        "id": "<UUID>",
+                        "flow": "xtls-rprx-vision"
                     }
                 ],
                 "decryption": "none",
                 "fallbacks": [
+                    {
+                        "alpn": "h2",
+                        "dest": 443,
+                        "xver": 1
+                    },
                     {
                         "path": "/<PATH>",
                         "dest": 443,
@@ -38,11 +44,31 @@
         {
             "port": 443,
             "listen": "127.0.0.1",
+            "settings": {
+                "clients": [
+                    {
+                        "id": "<UUID>",
+                        "flow": "xtls-rprx-vision"
+                    }
+                ],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "grpc",
+                "grpcSettings": {
+                    "serviceName": "<ServiceName>"
+                }
+            }
+        },
+        {
+            "port": 443,
+            "listen": "127.0.0.1",
             "protocol": "vless",
             "settings": {
                 "clients": [
                     {
-                        "id": "<UUID>"
+                        "id": "<UUID>",
+                        "flow": "xtls-rprx-vision"
                     }
                 ],
                 "decryption": "none"
@@ -51,7 +77,7 @@
                 "network": "ws",
                 "security": "none",
                 "wsSettings": {
-                    "acceptProxyProtocol": true,
+                    "acceptProxyProtocol": false,
                     "path": "/<PATH>"
                 }
             }
