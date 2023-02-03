@@ -2,6 +2,15 @@
     "log": {
         "loglevel": "warning"
     },
+    "routing": {
+        "rules": [
+            {
+                "type": "field",
+                "ip": ["geoip:ir"],
+                "outboundTag": "block"
+            }
+        ]
+    },
     "inbounds": [
         {
             "port": 443,
@@ -9,23 +18,19 @@
             "settings": {
                 "clients": [
                     {
-                        "id": "<UUID>",
-                        "flow": "none"
+                        "id": "<UUID>"
                     }
                 ],
-                "decryption": "none",
-                "fallbacks": [
-                    {
-                        "path": "/<PATH>",
-                        "dest": 443
-                    }
-                ]
+                "decryption": "none"
             },
             "streamSettings": {
-                "network": "tcp",
+                "network": "grpc",
+                "wsSettings": {
+                    "acceptProxyProtocol": false,
+                    "path": "/<PATH>"
+                },
                 "security": "tls",
                 "tlsSettings": {
-                    "alpn": ["http/1.1", "h2"],
                     "certificates": [
                         {
                             "certificateFile": "/cert/<DOMAIN>.cer",
@@ -34,41 +39,16 @@
                     ]
                 }
             }
-        },
-        {
-            "port": 443,
-            "listen": "127.0.0.1",
-            "protocol": "vless",
-            "settings": {
-                "clients": [
-                    {
-                        "id": "<UUID>",
-                        "flow": "none"
-                    }
-                ],
-                "decryption": "none"
-            },
-            "streamSettings": {
-                "network": "ws",
-                "security": "none",
-                "wsSettings": {
-                    "acceptProxyProtocol": false,
-                    "path": "/<PATH>"
-                }
-            }
         }
     ],
     "outbounds": [
         {
-            "protocol": "freedom"
+            "protocol": "freedom",
+            "tag": "direct"
+        },
+        {
+            "protocol": "blackhole",
+            "tag": "block"
         }
-    ],
-    "policy": {
-        "levels": {
-            "0": {
-                "handshake": 2,
-                "connIdle": 120
-            }
-        }
-    }
+    ]
 }
