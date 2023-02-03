@@ -18,18 +18,18 @@
             "settings": {
                 "clients": [
                     {
-                        "id": "<UUID>",
-                        "flow": "xtls-rprx-vision"
+                        "id": "<UUID>"
                     }
                 ],
                 "decryption": "none"
             },
             "streamSettings": {
-                "network": "tcp",
+                "network": "grpc",
+                "grpcSettings": {
+                    "serviceName": "<SERVICENAME>"
+                },
                 "security": "tls",
                 "tlsSettings": {
-                    "minVersion": "1.2",
-                    "alpn": ["http/1.1", "h2"],
                     "certificates": [
                         {
                             "certificateFile": "/cert/<DOMAIN>.cer",
@@ -37,10 +37,6 @@
                         }
                     ]
                 }
-            },
-            "sniffing": {
-                "enabled": true,
-                "destOverride": ["http", "tls"]
             }
         }
     ],
