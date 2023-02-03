@@ -10,7 +10,7 @@
                 "clients": [
                     {
                         "id": "<UUID>",
-                        "flow": "xtls-rprx-vision,none"
+                        "flow": "none"
                     }
                 ],
                 "decryption": "none",
@@ -43,7 +43,7 @@
                 "clients": [
                     {
                         "id": "<UUID>",
-                        "flow": "xtls-rprx-vision,none"
+                        "flow": "none"
                     }
                 ],
                 "decryption": "none"
