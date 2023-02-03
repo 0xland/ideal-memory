@@ -20,7 +20,7 @@ services:
             context: ./../xray
             dockerfile: Dockerfile
         ports:
-            - "443:443/tcp"
+            - "${PORT}:443/tcp"
         command:
             - "/start-xray.sh"
         volumes:

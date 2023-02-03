@@ -24,7 +24,7 @@
                 "decryption": "none"
             },
             "streamSettings": {
-                "network": "grpc",
+                "network": "ws",
                 "wsSettings": {
                     "acceptProxyProtocol": false,
                     "path": "/<PATH>"
