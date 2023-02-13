@@ -2,13 +2,26 @@
     "log": {
         "loglevel": "warning"
     },
+    "routing": {
+        "rules": [
+            {
+                "type": "field",
+                "ip": ["geoip:ir"],
+                "outboundTag": "block"
+            }
+        ]
+    },
     "inbounds": [
         {
-            "protocol": "vless",
             "port": 16834,
+            "protocol": "vless",
             "settings": {
-                "decryption": "none",
-                "clients": [{ "id": "65081a6d-28c7-43d0-b943-dd72c1e23607" }]
+                "clients": [
+                    {
+                        "id": "<UUID>"
+                    }
+                ],
+                "decryption": "none"
             },
             "streamSettings": {
                 "network": "kcp",
@@ -20,10 +33,19 @@
                     "type": "dtls"
                 },
                 "kcpSettings": {
-                    "seed": ""
+                    "seed": "<SEED>"
                 }
             }
         }
     ],
-    "outbounds": [{ "protocol": "freedom" }]
+    "outbounds": [
+        {
+            "protocol": "freedom",
+            "tag": "direct"
+        },
+        {
+            "protocol": "blackhole",
+            "tag": "block"
+        }
+    ]
 }

@@ -6,7 +6,7 @@ services:
             context: ./../xray
             dockerfile: Dockerfile
         ports:
-            - "16834:16834/udp"
+            - "${PORT}:16834/udp"
         command:
             - "/start-xray.sh"
         volumes:
