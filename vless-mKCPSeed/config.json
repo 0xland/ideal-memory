@@ -25,13 +25,7 @@
             },
             "streamSettings": {
                 "network": "kcp",
-                "mtu": 1360,
-                "uplinkCapacity": 5,
-                "downlinkCapacity": 12,
-                "congestion": false,
-                "header": {
-                    "type": "dtls"
-                },
+                "congestion": true,
                 "kcpSettings": {
                     "seed": "<SEED>"
                 }
