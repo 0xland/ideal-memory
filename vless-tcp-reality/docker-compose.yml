@@ -1,0 +1,21 @@
+version: "3.7"
+
+services:
+    ss-server:
+        build:
+            context: ./../xray
+            dockerfile: Dockerfile
+        ports:
+            - "${PORT}:443/tcp"
+        command:
+            - "/start-xray.sh"
+        volumes:
+            - ./../cert:/cert
+            - ./config.json:/config.json
+            - /var/run/docker.sock:/var/run/docker.sock
+        restart: on-failure
+        user: root
+        ulimits:
+            nofile:
+                soft: 65536
+                hard: 65536

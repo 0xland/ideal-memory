@@ -8,7 +8,8 @@ RUN set -ex \
     && apk add --no-cache tzdata ca-certificates unzip
 
 RUN cd /tmp && \
-    TAG=$(wget -qO- https://api.github.com/repos/XTLS/Xray-core/releases/latest | grep tag_name | cut -d '"' -f4) && \
+    # TAG=$(wget -qO- https://api.github.com/repos/XTLS/Xray-core/releases/latest | grep tag_name | cut -d '"' -f4) && \
+    TAG=v1.8.1 && \
     wget https://github.com/XTLS/Xray-core/releases/download/$TAG/Xray-linux-64.zip && \
     unzip *.zip && \
     rm *.zip && \
