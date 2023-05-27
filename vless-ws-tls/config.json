@@ -1,12 +1,16 @@
 {
     "log": {
-        "loglevel": "warning"
+        "loglevel": "none"
     },
     "routing": {
+        "domainStrategy": "IPIfNonMatch",
         "rules": [
             {
                 "type": "field",
-                "ip": ["geoip:ir"],
+                "ip": [
+                    "geoip:ir",
+                    "geoip:private"
+                ],
                 "outboundTag": "block"
             }
         ]
@@ -38,6 +42,14 @@
                         }
                     ]
                 }
+            },
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls",
+                    "quic"
+                ]
             }
         }
     ],
