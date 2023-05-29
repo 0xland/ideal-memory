@@ -7,6 +7,11 @@
         "rules": [
             {
                 "type": "field",
+                "network": "tcp",
+                "outboundTag": "<OUTBOUNDTAG>"
+            },
+            {
+                "type": "field",
                 "port": "443",
                 "network": "udp",
                 "outboundTag": "block"
@@ -61,6 +66,18 @@
         {
             "protocol": "freedom",
             "tag": "direct"
+        },
+        {
+            "protocol": "socks",
+            "settings": {
+              "servers": [
+                {
+                  "address": "host.docker.internal",
+                  "port": 8000
+                }
+              ]
+            },
+          "tag": "wrap-socks"
         },
         {
             "protocol": "blackhole",
