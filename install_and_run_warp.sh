@@ -19,6 +19,7 @@ apt update
 apt install -y cloudflare-warp
 apt install -y socat
 
+warp-cli delete
 warp-cli --accept-tos register
 warp-cli set-mode proxy
 warp-cli set-proxy-port 5001
