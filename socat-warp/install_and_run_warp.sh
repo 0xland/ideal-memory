@@ -26,4 +26,5 @@ warp-cli set-proxy-port 5001
 warp-cli connect
 
 socat tcp-listen:5000,reuseaddr,fork tcp:localhost:5001 &
+
 echo "Complete!"

@@ -7,11 +7,6 @@
         "rules": [
             {
                 "type": "field",
-                "network": "tcp",
-                "outboundTag": "<OUTBOUNDTAG>"
-            },
-            {
-                "type": "field",
                 "port": "443",
                 "network": "udp",
                 "outboundTag": "block"
@@ -23,6 +18,11 @@
                     "geoip:private"
                 ],
                 "outboundTag": "block"
+            },
+            {
+                "type": "field",
+                "network": "tcp",
+                "outboundTag": "<OUTBOUNDTAG>"
             }
         ]
     },
