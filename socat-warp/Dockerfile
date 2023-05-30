@@ -6,7 +6,7 @@ USER root
 
 # Update package repositories
 RUN apt-get update && \
-    apt-get install -y curl gnupg ca-certificates libcap2-bin lsb-release
+    apt-get install -y curl gnupg ca-certificates lsb-release
 
 # Add Cloudflare Warp GPG key
 RUN curl https://pkg.cloudflareclient.com/pubkey.gpg | gpg --yes --dearmor --output /usr/share/keyrings/cloudflare-warp-archive-keyring.gpg
