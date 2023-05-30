@@ -1,11 +1,12 @@
 FROM ubuntu:22.04
 
+COPY entrypoint.sh /
+
 USER root
 
 # Update package repositories
-RUN apt update
-
-RUN apt install -y curl
+RUN apt-get update && \
+    apt-get install -y curl gnupg ca-certificates libcap2-bin lsb-release
 
 # Add Cloudflare Warp GPG key
 RUN curl https://pkg.cloudflareclient.com/pubkey.gpg | gpg --yes --dearmor --output /usr/share/keyrings/cloudflare-warp-archive-keyring.gpg
@@ -14,16 +15,8 @@ RUN curl https://pkg.cloudflareclient.com/pubkey.gpg | gpg --yes --dearmor --out
 RUN echo "deb [arch=amd64 signed-by=/usr/share/keyrings/cloudflare-warp-archive-keyring.gpg] https://pkg.cloudflareclient.com/ $(lsb_release -cs) main" | tee /etc/apt/sources.list.d/cloudflare-client.list
 
 # Update package repositories
-RUN apt update
+RUN apt-get update && \
+    apt-get install -y cloudflare-warp socat && \
+    chmod +x /entrypoint.sh
 
-# Install Cloudflare Warp
-RUN apt install -y cloudflare-warp
-RUN apt install -y socat
-
-RUN warp-cli --accept-tos delete
-RUN warp-cli --accept-tos register
-RUN warp-cli --accept-tos set-mode proxy
-RUN warp-cli --accept-tos set-proxy-port 5001
-RUN warp-cli --accept-tos connect
-
-RUN socat tcp-listen:5000,reuseaddr,fork tcp:localhost:5001 &
+CMD bash /entrypoint.sh
