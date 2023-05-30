@@ -59,7 +59,7 @@
     ],
     "outbounds": [
         {
-            "protocol": "<OUTPRO>",
+            "protocol": "<OUTPROTOCOL>",
             "settings": {
               "servers": [
                 {
