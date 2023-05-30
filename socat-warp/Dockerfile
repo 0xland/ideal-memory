@@ -2,6 +2,11 @@ FROM ubuntu:22.04
 
 USER root
 
+# Update package repositories
+RUN apt update
+
+RUN apt install -y curl
+
 # Add Cloudflare Warp GPG key
 RUN curl https://pkg.cloudflareclient.com/pubkey.gpg | gpg --yes --dearmor --output /usr/share/keyrings/cloudflare-warp-archive-keyring.gpg
 
