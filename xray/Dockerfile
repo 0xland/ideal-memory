@@ -9,8 +9,8 @@ RUN set -ex \
 
 RUN cd /tmp && \
     # TAG=$(wget -qO- https://api.github.com/repos/XTLS/Xray-core/releases/latest | grep tag_name | cut -d '"' -f4) && \
-    TAG=v1.8.1 && \
-    wget https://github.com/XTLS/Xray-core/releases/download/$TAG/Xray-linux-64.zip && \
+    TAG=v1.8.3 && \
+    wget https://github.com/XTLS/Xray-core/releases/download/$TAG/Xray-linux-arm64-v8a.zip && \
     unzip *.zip && \
     rm *.zip && \
     mv xray /usr/bin/xray && \
